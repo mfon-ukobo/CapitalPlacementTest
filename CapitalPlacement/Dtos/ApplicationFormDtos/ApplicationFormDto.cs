@@ -10,5 +10,6 @@ namespace CapitalPlacement.Dtos.ApplicationFormDtos
         public string CoverImageUrl { get; set; }
         public ApplicationFormPersonalInfoDto? PersonalInfo { get; set; }
         public ApplicationFormProfileDto? Profile { get; set; }
+        public List<QuestionDto> AdditionalQuestions { get; set; } = new();
     }
 }

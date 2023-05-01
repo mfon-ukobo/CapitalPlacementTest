@@ -34,11 +34,6 @@ var app = builder.Build();
 
 app.MapControllers();
 
-//var testingService = app.Services.GetRequiredService<TestingEndpoints>();
-//await testingService.AddProgram();
-//await testingService.GetProgram();
-//await testingService.AddApplicationForm();
-
 app.Run();
 
 static async Task<CosmosDbServiceProvider> InitializeCosmosClientInstanceAsync(string account, string key, string databaseName)
