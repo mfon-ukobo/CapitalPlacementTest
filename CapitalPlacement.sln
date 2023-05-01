@@ -5,6 +5,12 @@ VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapitalPlacement", "CapitalPlacement\CapitalPlacement.csproj", "{66F17877-083D-4942-BCB6-FA8FA3B82E6C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E5D4E74D-BB39-41FA-B1A2-CAA517DE5330}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C94E9FE3-92E2-47F5-B247-B1AD2E6D7C60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapitalPlacement.Tests", "CapitalPlacement.Tests\CapitalPlacement.Tests.csproj", "{47E76687-B9EB-4919-924A-2E8F9B50EFED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +21,17 @@ Global
 		{66F17877-083D-4942-BCB6-FA8FA3B82E6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66F17877-083D-4942-BCB6-FA8FA3B82E6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66F17877-083D-4942-BCB6-FA8FA3B82E6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47E76687-B9EB-4919-924A-2E8F9B50EFED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47E76687-B9EB-4919-924A-2E8F9B50EFED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47E76687-B9EB-4919-924A-2E8F9B50EFED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47E76687-B9EB-4919-924A-2E8F9B50EFED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{66F17877-083D-4942-BCB6-FA8FA3B82E6C} = {E5D4E74D-BB39-41FA-B1A2-CAA517DE5330}
+		{47E76687-B9EB-4919-924A-2E8F9B50EFED} = {C94E9FE3-92E2-47F5-B247-B1AD2E6D7C60}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {10C4A088-DA54-4AA6-B514-91FE5DB1D240}
