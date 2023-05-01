@@ -8,6 +8,11 @@ namespace CapitalPlacement.Models
 {
     public abstract class BaseModel
     {
+        public BaseModel(Guid id)
+        {
+            Id = id.ToString();
+        }
+
         public string Id { get; set; }
     }
 }

@@ -42,11 +42,10 @@ namespace CapitalPlacement.Endpoints
                 .RuleFor(x => x.MinQualification, val => Qualification.High_School)
                 .RuleFor(x => x.MaxApplicationAllowed, val => val.Random.Int(1, 10000));
 
-            var id = Guid.NewGuid().ToString();
+            var id = Guid.NewGuid();
 
-            await _programService.CreateAsync(new()
+            await _programService.CreateAsync(new(id)
             {
-                Id = id,
                 Detail = programDetailFaker.Generate(1)[0]
             });
 
@@ -59,9 +58,9 @@ namespace CapitalPlacement.Endpoints
             Console.Write(JsonConvert.SerializeObject(program));
         }
 
-        public async Task AddApplicationForm()
+        /*public async Task AddApplicationForm()
         {
-            var applicationForm = new ApplicationForm
+            var applicationForm = new ApplicationForm(id)
             {
                 CoverImageUrl = "google.com",
                 Id = "0a3ad493-a821-4c2d-a381-5ee7c0346134",
@@ -71,6 +70,6 @@ namespace CapitalPlacement.Endpoints
             };
 
             await _context.ApplicationForms.AddAsync(applicationForm);
-        }
+        }*/
     }
 }

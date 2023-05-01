@@ -11,6 +11,10 @@ namespace CapitalPlacement.Models
 {
     public class ProgramConfig : BaseModel
     {
+        public ProgramConfig(Guid id) : base(id)
+        {
+        }
+
         public ProgramDetail Detail { get; set; } = new ProgramDetail();
         public ProgramStatus Status { get; set; } = ProgramStatus.Draft;
     }
