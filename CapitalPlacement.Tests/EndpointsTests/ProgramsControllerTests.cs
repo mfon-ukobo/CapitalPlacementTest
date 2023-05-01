@@ -1,4 +1,12 @@
-﻿using System;
+﻿using AutoMapper;
+using CapitalPlacement.Database;
+using CapitalPlacement.Dtos.ProgramDetailDtos;
+using CapitalPlacement.Endpoints;
+using CapitalPlacement.Models;
+using CapitalPlacement.Models.ProgramDetailModels;
+using Microsoft.AspNetCore.Mvc;
+using Moq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,8 +25,31 @@ namespace CapitalPlacement.Tests.EndpointsTests
         public async Task CreateProgram_ShouldBeSuccessful_WithValidValues()
         {
             // arrange
+            var mapperMock = new Mock<IMapper>();
+            mapperMock.Setup(x => x.Map<CreateProgramRequestDto, ProgramDetail>(It.IsAny<CreateProgramRequestDto>()))
+                .Returns(It.IsAny<ProgramDetail>());
+
+            var cosmosDbSetMock = new Mock<ICosmosDbSet<ProgramModel>>();
+            cosmosDbSetMock.Setup(x => x.AddAsync(It.IsAny<ProgramModel>()))
+                .Returns(Task.CompletedTask);
+
+            var cosmosContextMock = new Mock<ICosmosContext>();
+            cosmosContextMock.Setup(x => x.Programs.AddAsync(It.IsAny<ProgramModel>())).Returns(Task.CompletedTask);
+
+            var controller = new ProgramsController(mapperMock.Object, cosmosContextMock.Object);
+
+            var request = new CreateProgramRequestDto
+            {
+                Title = ""
+            };
+
             // act
+            var result = await controller.CreateProgram(request);
+
             // assert
+            mapperMock.Verify(x => x.Map<ProgramDetail>(It.IsAny<CreateProgramRequestDto>()), Times.Once());
+
+            var okObjectResult = Assert.IsType<OkObjectResult>(result);
         }
     }
 }
