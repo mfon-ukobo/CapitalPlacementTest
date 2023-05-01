@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace CapitalPlacement.Models
 {
-    public class ProgramConfig : BaseModel
+    public class ProgramModel : BaseModel
     {
-        public ProgramConfig(Guid id) : base(id)
+        public ProgramModel(Guid id) : base(id)
         {
         }
 

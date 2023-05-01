@@ -9,9 +9,9 @@ namespace CapitalPlacement.Services
 {
     public interface IProgramService
     {
-        Task CreateAsync(ProgramConfig program);
+        Task<ProgramModel> CreateAsync(Models.ProgramModel program);
         Task DeleteAsync(string id);
-        Task<ProgramConfig> GetAsync(string id);
-        Task UpdateAsync(string id, ProgramConfig program);
+        Task<Models.ProgramModel> GetAsync(string id);
+        Task UpdateAsync(string id, Models.ProgramModel program);
     }
 }

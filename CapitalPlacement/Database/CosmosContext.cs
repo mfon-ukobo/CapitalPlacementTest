@@ -14,11 +14,11 @@ namespace CapitalPlacement.Database
     {
         public CosmosContext(CosmosDbServiceProvider provider)
         {
-            Programs = provider.Initialize<ProgramConfig>("programs");
+            Programs = provider.Initialize<Models.ProgramModel>("programs");
             ApplicationForms = provider.Initialize<ApplicationForm>("applicationForms");
         }
 
-        public ICosmosDbSet<ProgramConfig> Programs { get; }
+        public ICosmosDbSet<Models.ProgramModel> Programs { get; }
         public ICosmosDbSet<ApplicationForm> ApplicationForms { get; }
     }
 }

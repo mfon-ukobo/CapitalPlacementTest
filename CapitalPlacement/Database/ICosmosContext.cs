@@ -10,7 +10,7 @@ namespace CapitalPlacement.Database
 {
     public interface ICosmosContext
     {
-        ICosmosDbSet<ProgramConfig> Programs { get; }
+        ICosmosDbSet<Models.ProgramModel> Programs { get; }
         ICosmosDbSet<ApplicationForm> ApplicationForms { get; }
     }
 }

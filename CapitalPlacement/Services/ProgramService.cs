@@ -17,9 +17,10 @@ namespace CapitalPlacement.Services
             _context = context;
         }
 
-        public async Task CreateAsync(ProgramConfig program)
+        public async Task<ProgramModel> CreateAsync(ProgramModel program)
         {
             await _context.Programs.AddAsync(program);
+            return program;
         }
 
         public async Task DeleteAsync(string id)
@@ -27,12 +28,12 @@ namespace CapitalPlacement.Services
             await _context.Programs.DeleteAsync(id);
         }
 
-        public async Task UpdateAsync(string id, ProgramConfig program)
+        public async Task UpdateAsync(string id, Models.ProgramModel program)
         {
             await _context.Programs.UpdateAsync(id, program);
         }
 
-        public async Task<ProgramConfig> GetAsync(string id)
+        public async Task<Models.ProgramModel> GetAsync(string id)
         {
             return await _context.Programs.GetAsync(id);
         }
