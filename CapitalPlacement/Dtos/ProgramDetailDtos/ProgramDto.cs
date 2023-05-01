@@ -1,20 +1,21 @@
 ﻿using CapitalPlacement.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CapitalPlacement.Models.ProgramDetailModels
+namespace CapitalPlacement.Dtos.ProgramDetailDtos
 {
-    public class ProgramDetail
+    public class ProgramDto
+    {
+        public string Id { get; set; }
+        public ProgramDetailDto Detail { get; set; }
+    }
+
+    public class ProgramDetailDto
     {
         public string Title { get; set; }
         public string Summary { get; set; }
         public string Description { get; set; }
         public string Benefits { get; set; }
         public string ApplicationCriteria { get; set; }
-        public string[] Skills { get; set; }
+        public List<string> Skills { get; set; }
         public DateOnly ProgramStart { get; set; }
         public DateOnly ApplicationOpen { get; set; }
         public DateOnly ApplicationClose { get; set; }

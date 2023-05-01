@@ -1,6 +1,6 @@
 ﻿using CapitalPlacement.Enums;
 
-namespace CapitalPlacement.Dtos.Requests
+namespace CapitalPlacement.Dtos.ProgramDetailDtos
 {
     public class CreateProgramRequestDto
     {

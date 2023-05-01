@@ -1,6 +1,7 @@
 ﻿namespace CapitalPlacement.Dtos
 {
-    public class ProgramDto
+    public class YesNoQuestionDto : QuestionDto
     {
+
     }
 }

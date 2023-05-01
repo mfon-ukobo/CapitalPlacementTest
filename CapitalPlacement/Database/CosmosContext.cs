@@ -1,5 +1,6 @@
 ﻿using CapitalPlacement.Models;
 using CapitalPlacement.Models.ApplicationFormModels;
+using CapitalPlacement.Models.Workflow;
 using CapitalPlacement.Utilities;
 using Microsoft.Azure.Cosmos;
 using System;
@@ -14,11 +15,13 @@ namespace CapitalPlacement.Database
     {
         public CosmosContext(CosmosDbServiceProvider provider)
         {
-            Programs = provider.Initialize<Models.ProgramModel>("programs");
+            Programs = provider.Initialize<ProgramModel>("programs");
             ApplicationForms = provider.Initialize<ApplicationForm>("applicationForms");
+            Workflows = provider.Initialize<Workflow>("workflows");
         }
 
-        public ICosmosDbSet<Models.ProgramModel> Programs { get; }
+        public ICosmosDbSet<ProgramModel> Programs { get; }
         public ICosmosDbSet<ApplicationForm> ApplicationForms { get; }
+        public ICosmosDbSet<Workflow> Workflows { get; }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using CapitalPlacement.Dtos.Requests;
+using CapitalPlacement.Dtos.ProgramDetailDtos;
 using CapitalPlacement.Models;
 using CapitalPlacement.Models.ProgramDetailModels;
 
@@ -9,7 +9,9 @@ namespace CapitalPlacement.Mapping
     {
         public ProgramMapping()
         {
+            CreateMap<ProgramModel, ProgramDto>();
             CreateMap<CreateProgramRequestDto, ProgramDetail>();
+            CreateMap<ProgramDetail, ProgramDetailDto>();
         }
     }
 }
