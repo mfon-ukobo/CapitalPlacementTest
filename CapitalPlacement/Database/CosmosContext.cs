@@ -1,7 +1,6 @@
 ﻿using CapitalPlacement.Models;
 using CapitalPlacement.Models.ApplicationFormModels;
 using CapitalPlacement.Models.Workflow;
-using CapitalPlacement.Utilities;
 using Microsoft.Azure.Cosmos;
 using System;
 using System.Collections.Generic;

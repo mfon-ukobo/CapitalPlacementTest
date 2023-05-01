@@ -2,7 +2,6 @@
 using CapitalPlacement.Endpoints;
 using CapitalPlacement.Models;
 using CapitalPlacement.Services;
-using CapitalPlacement.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Configuration;

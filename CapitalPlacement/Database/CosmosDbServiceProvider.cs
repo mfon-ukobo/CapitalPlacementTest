@@ -1,5 +1,4 @@
-﻿using CapitalPlacement.Database;
-using CapitalPlacement.Models;
+﻿using CapitalPlacement.Models;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -10,7 +9,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CapitalPlacement.Utilities
+namespace CapitalPlacement.Database
 {
     internal class CosmosDbServiceProvider
     {
@@ -32,7 +31,8 @@ namespace CapitalPlacement.Utilities
             {
                 SerializerOptions = new()
                 {
-                    PropertyNamingPolicy = CosmosPropertyNamingPolicy.CamelCase
+                    PropertyNamingPolicy = CosmosPropertyNamingPolicy.CamelCase,
+                    Indented = true
                 }
             });
 

@@ -8,6 +8,5 @@ namespace CapitalPlacement.Dtos.WorkflowDtos
         public string Name { get; set; }
         public virtual StageType Type { get; set; }
         public bool ShowToCandidate { get; set; }
-        public DateOnly CreatedAt { get; set; }
     }
 }
