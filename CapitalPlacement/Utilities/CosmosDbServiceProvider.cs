@@ -1,7 +1,6 @@
 ﻿using CapitalPlacement.Database;
 using CapitalPlacement.Models;
 using Microsoft.Azure.Cosmos;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;

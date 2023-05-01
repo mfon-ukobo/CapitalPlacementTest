@@ -2,7 +2,6 @@
 using CapitalPlacement.Models.ApplicationFormModels;
 using CapitalPlacement.Utilities;
 using Microsoft.Azure.Cosmos;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;

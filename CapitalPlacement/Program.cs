@@ -7,28 +7,27 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-var hostBuilder = Host.CreateDefaultBuilder(args)
-    .ConfigureAppConfiguration((hostingContext, config) =>
-    {
-        config.AddJsonFile("appsettings.json");
-        config.AddEnvironmentVariables();
-    })
-    .ConfigureServices((hostingContext, services) =>
-    {
-        var configurationSection = hostingContext.Configuration.GetSection("CosmosDb");
-        var databaseName = configurationSection["DatabaseName"];
-        var account = configurationSection["Account"];
-        var key = configurationSection["Key"];
+/*var builder = WebApplication.CreateBuilder(args);
+builder.WebHost.UseUrls("http://localhost:4000");
 
-        services.AddSingleton<CosmosDbServiceProvider>(InitializeCosmosClientInstanceAsync(account, key, databaseName).GetAwaiter().GetResult());
-        services.AddSingleton<ICosmosContext, CosmosContext>();
-        services.AddScoped<IProgramService, ProgramService>();
+builder.Configuration.AddJsonFile("appsettings.json");
 
-        // TODO: Clean up
-        services.AddScoped<TestingEndpoints>();
-    });
+var services = builder.Services;
+var configuration = builder.Configuration;
 
-var app = hostBuilder.Build();
+var configurationSection = configuration.GetSection("CosmosDb");
+var databaseName = configurationSection["DatabaseName"];
+var account = configurationSection["Account"];
+var key = configurationSection["Key"];
+
+services.AddSingleton<CosmosDbServiceProvider>(InitializeCosmosClientInstanceAsync(account, key, databaseName).GetAwaiter().GetResult());
+services.AddSingleton<ICosmosContext, CosmosContext>();
+services.AddScoped<IProgramService, ProgramService>();
+
+// TODO: Clean up
+services.AddScoped<TestingEndpoints>();
+
+var app = builder.Build();
 
 var testingService = app.Services.GetRequiredService<TestingEndpoints>();
 await testingService.AddProgram();
@@ -50,4 +49,4 @@ static async Task<CosmosDbServiceProvider> InitializeCosmosClientInstanceAsync(s
     var database = await client.CreateDatabaseIfNotExistsAsync(databaseName);
     //await database.Database.CreateContainerIfNotExistsAsync(containerName, "/id");
     return new CosmosDbServiceProvider(account, key, databaseName);
-}
+}*/
