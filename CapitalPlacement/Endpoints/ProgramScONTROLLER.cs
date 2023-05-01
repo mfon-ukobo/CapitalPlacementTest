@@ -99,9 +99,17 @@ namespace CapitalPlacement.Endpoints
             var applicationFormToUpdate = _mapper.Map<ApplicationForm>(applicationFormDto);
             applicationFormToUpdate.Id = id;
 
-            await _context.ApplicationForms.UpdateAsync(id, applicationFormToUpdate);
+            try
+            {
+                await _context.ApplicationForms.UpdateAsync(id, applicationFormToUpdate);
 
-            return NoContent();
+                return NoContent();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         /// <summary>
@@ -129,9 +137,17 @@ namespace CapitalPlacement.Endpoints
             var workflow = _mapper.Map<Workflow>(workflowDto);
             workflow.Id = id;
 
-            await _context.Workflows.UpdateAsync(id, workflow);
+            try
+            {
+                await _context.Workflows.UpdateAsync(id, workflow);
 
-            return NoContent();
+                return NoContent();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         [HttpGet("{id:Guid}/summary")]
