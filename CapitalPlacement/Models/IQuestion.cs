@@ -10,6 +10,7 @@ namespace CapitalPlacement.Models
 
     public interface IChoiceQuestion
     {
-        string[] Choices { get; set; }
+        List<string> Choices { get; set; }
+        bool EnableOtherOption { get; set; }
     }
 }

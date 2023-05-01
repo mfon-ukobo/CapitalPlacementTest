@@ -4,7 +4,13 @@ namespace CapitalPlacement.Models
 {
     public class DropDownQuestion : Question, IChoiceQuestion
     {
+        public DropDownQuestion()
+        {
+            EnableOtherOption = true;
+        }
+
         public override QuestionType Type => QuestionType.Dropdown;
-        public string[] Choices { get; set; }
+        public List<string> Choices { get; set; }
+        public bool EnableOtherOption { get; set; }
     }
 }
