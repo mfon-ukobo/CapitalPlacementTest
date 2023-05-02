@@ -1,6 +1,8 @@
 ﻿using CapitalPlacement.Database;
 using CapitalPlacement.Endpoints;
 using CapitalPlacement.Models;
+using CapitalPlacement.Services;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +28,9 @@ var key = configurationSection["Key"];
 services.AddSingleton<CosmosDbServiceProvider>(InitializeCosmosClientInstanceAsync(account, key, databaseName).GetAwaiter().GetResult());
 services.AddSingleton<ICosmosContext, CosmosContext>();
 
+services.AddScoped<IProgramService, ProgramService>();
+
+services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();

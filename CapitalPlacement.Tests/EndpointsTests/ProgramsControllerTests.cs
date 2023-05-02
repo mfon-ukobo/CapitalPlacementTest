@@ -4,6 +4,7 @@ using CapitalPlacement.Dtos.ProgramDetailDtos;
 using CapitalPlacement.Endpoints;
 using CapitalPlacement.Models;
 using CapitalPlacement.Models.ProgramDetailModels;
+using CapitalPlacement.Services;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
@@ -33,10 +34,13 @@ namespace CapitalPlacement.Tests.EndpointsTests
             cosmosDbSetMock.Setup(x => x.AddAsync(It.IsAny<ProgramModel>()))
                 .Returns(Task.CompletedTask);
 
+            var programServiceMock = new Mock<IProgramService>();
+            programServiceMock.Setup(x => x.AddAsync(It.IsAny<ProgramModel>())).Returns(Task.FromResult(It.IsAny<ProgramModel>()));
+
             var cosmosContextMock = new Mock<ICosmosContext>();
             cosmosContextMock.Setup(x => x.Programs.AddAsync(It.IsAny<ProgramModel>())).Returns(Task.CompletedTask);
 
-            var controller = new ProgramsController(mapperMock.Object, cosmosContextMock.Object);
+            var controller = new ProgramsController(mapperMock.Object, programServiceMock.Object);
 
             var request = new CreateProgramRequestDto
             {
@@ -65,14 +69,13 @@ namespace CapitalPlacement.Tests.EndpointsTests
             mapperMock.Setup(x => x.Map<CreateProgramRequestDto, ProgramDetail>(request))
                 .Returns(new ProgramDetail { Title = request.Title });
 
-            /*var cosmosDbSetMock = new Mock<ICosmosDbSet<ProgramModel>>();
-            cosmosDbSetMock.Setup(x => x.AddAsync(It.IsAny<ProgramModel>()))
-                .Returns(Task.CompletedTask);*/
+            var programServiceMock = new Mock<IProgramService>();
+            programServiceMock.Setup(x => x.AddAsync(It.IsAny<ProgramModel>())).Returns(Task.FromResult(It.IsAny<ProgramModel>()));
 
             var cosmosContextMock = new Mock<ICosmosContext>();
             cosmosContextMock.Setup(x => x.Programs.AddAsync(It.IsAny<ProgramModel>())).Returns(Task.CompletedTask);
 
-            var controller = new ProgramsController(mapperMock.Object, cosmosContextMock.Object);
+            var controller = new ProgramsController(mapperMock.Object, programServiceMock.Object);
 
             // act
             var result = await controller.CreateProgram(request);

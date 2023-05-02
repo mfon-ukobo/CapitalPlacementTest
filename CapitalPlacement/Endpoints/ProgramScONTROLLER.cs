@@ -7,6 +7,7 @@ using CapitalPlacement.Models;
 using CapitalPlacement.Models.ApplicationFormModels;
 using CapitalPlacement.Models.ProgramDetailModels;
 using CapitalPlacement.Models.Workflow;
+using CapitalPlacement.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,12 +18,12 @@ namespace CapitalPlacement.Endpoints
     public class ProgramsController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private readonly ICosmosContext _context;
+        private readonly IProgramService _programService;
 
-        public ProgramsController(IMapper mapper, ICosmosContext context)
+        public ProgramsController(IMapper mapper, IProgramService programService)
         {
             _mapper = mapper;
-            _context = context;
+            _programService = programService;
         }
 
         /// <summary>
@@ -33,16 +34,15 @@ namespace CapitalPlacement.Endpoints
         [HttpPost("")]
         public async Task<IActionResult> CreateProgram([FromBody] CreateProgramRequestDto request)
         {
-            var id = Guid.NewGuid();
-            var program = new ProgramModel(id)
+            var program = new ProgramModel
             {
                 Detail = _mapper.Map<ProgramDetail>(request)
             };
 
             try
             {
-                await _context.Programs.AddAsync(program);
-                return Ok(new { Id = id });
+                var programModel = await _programService.AddAsync(program);
+                return Ok(_mapper.Map<ProgramDto>(programModel));
             }
             catch (Exception)
             {
@@ -58,7 +58,7 @@ namespace CapitalPlacement.Endpoints
         [HttpGet("{id:Guid}")]
         public async Task<IActionResult> GetProgram(string id)
         {
-            var program = await _context.Programs.GetAsync(id);
+            var program = await _programService.GetAsync(id);
             return Ok(_mapper.Map<ProgramDto>(program));
         }
 
@@ -69,7 +69,7 @@ namespace CapitalPlacement.Endpoints
         [HttpGet("")]
         public async Task<IActionResult> GetPrograms()
         {
-            var programs = await _context.Programs.GetMultipleAsync("SELECT * FROM c");
+            var programs = await _programService.GetMultipleAsync();
             return Ok(_mapper.Map<IEnumerable<ProgramDto>>(programs));
         }
 
@@ -81,7 +81,7 @@ namespace CapitalPlacement.Endpoints
         [HttpGet("{id:Guid}/application-form")]
         public async Task<IActionResult> GetApplicationForm(string id)
         {
-            var applicationForm = await _context.ApplicationForms.GetAsync(id);
+            var applicationForm = await _programService.GetApplicationFormAsync(id);
 
             return Ok(_mapper.Map<ApplicationFormDto>(applicationForm));
         }
@@ -100,9 +100,9 @@ namespace CapitalPlacement.Endpoints
 
             try
             {
-                await _context.ApplicationForms.UpdateAsync(id, applicationFormToUpdate);
+                var result = await _programService.UpdateApplicationFormAsync(id, applicationFormToUpdate);
 
-                return NoContent();
+                return Ok(_mapper.Map<ApplicationForm>(result));
             }
             catch (Exception)
             {
@@ -119,7 +119,7 @@ namespace CapitalPlacement.Endpoints
         [HttpGet("{id:Guid}/workflow")]
         public async Task<IActionResult> GetWorkflow(string id)
         {
-            var workflow = await _context.Workflows.GetAsync(id);
+            var workflow = await _programService.GetWorkflowAsync(id);
 
             return Ok(_mapper.Map<WorkflowDto>(workflow));
         }
@@ -138,9 +138,9 @@ namespace CapitalPlacement.Endpoints
 
             try
             {
-                await _context.Workflows.UpdateAsync(id, workflow);
+                var result = await _programService.UpdateWorkflowAsync(id, workflow);
 
-                return NoContent();
+                return Ok(_mapper.Map<WorkflowDto>(result));
             }
             catch (Exception)
             {
@@ -152,9 +152,9 @@ namespace CapitalPlacement.Endpoints
         [HttpGet("{id:Guid}/summary")]
         public async Task<IActionResult> Summary(string id)
         {
-            var program = await _context.Programs.GetAsync(id);
-            var workflow = await _context.Workflows.GetAsync(id);
-            var applicationForm = await _context.ApplicationForms.GetAsync(id);
+            var program = await _programService.GetAsync(id);
+            var workflow = await _programService.GetWorkflowAsync(id);
+            var applicationForm = await _programService.GetApplicationFormAsync(id);
 
             return Ok(new ProgramSummaryDto
             {
