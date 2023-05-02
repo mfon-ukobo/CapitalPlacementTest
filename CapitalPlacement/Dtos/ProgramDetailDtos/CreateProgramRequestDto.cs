@@ -1,9 +1,11 @@
 ﻿using CapitalPlacement.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace CapitalPlacement.Dtos.ProgramDetailDtos
 {
     public class CreateProgramRequestDto
     {
+        [Required]
         public string Title { get; set; }
         public string Summary { get; set; }
         public string Description { get; set; }

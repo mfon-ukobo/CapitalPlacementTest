@@ -51,5 +51,34 @@ namespace CapitalPlacement.Tests.EndpointsTests
 
             var okObjectResult = Assert.IsType<OkObjectResult>(result);
         }
+
+        [Fact]
+        public async Task CreateProgram_ShouldReturnBadRequest_WithInvalidValues()
+        {
+            // arrange
+            var request = new CreateProgramRequestDto
+            {
+                Title = "A title"
+            };
+
+            var mapperMock = new Mock<IMapper>();
+            mapperMock.Setup(x => x.Map<CreateProgramRequestDto, ProgramDetail>(request))
+                .Returns(new ProgramDetail { Title = request.Title });
+
+            /*var cosmosDbSetMock = new Mock<ICosmosDbSet<ProgramModel>>();
+            cosmosDbSetMock.Setup(x => x.AddAsync(It.IsAny<ProgramModel>()))
+                .Returns(Task.CompletedTask);*/
+
+            var cosmosContextMock = new Mock<ICosmosContext>();
+            cosmosContextMock.Setup(x => x.Programs.AddAsync(It.IsAny<ProgramModel>())).Returns(Task.CompletedTask);
+
+            var controller = new ProgramsController(mapperMock.Object, cosmosContextMock.Object);
+
+            // act
+            var result = await controller.CreateProgram(request);
+
+            // assert
+            var okObjectResult = Assert.IsType<BadRequestObjectResult>(result);
+        }
     }
 }

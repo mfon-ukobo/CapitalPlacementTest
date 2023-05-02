@@ -1,7 +1,6 @@
 ﻿using CapitalPlacement.Database;
 using CapitalPlacement.Endpoints;
 using CapitalPlacement.Models;
-using CapitalPlacement.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Configuration;
@@ -26,7 +25,6 @@ var key = configurationSection["Key"];
 
 services.AddSingleton<CosmosDbServiceProvider>(InitializeCosmosClientInstanceAsync(account, key, databaseName).GetAwaiter().GetResult());
 services.AddSingleton<ICosmosContext, CosmosContext>();
-services.AddScoped<IProgramService, ProgramService>();
 
 services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
@@ -47,6 +45,5 @@ static async Task<CosmosDbServiceProvider> InitializeCosmosClientInstanceAsync(s
     });
 
     var database = await client.CreateDatabaseIfNotExistsAsync(databaseName);
-    //await database.Database.CreateContainerIfNotExistsAsync(containerName, "/id");
     return new CosmosDbServiceProvider(account, key, databaseName);
 }
